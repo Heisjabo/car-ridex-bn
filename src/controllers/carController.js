@@ -71,7 +71,7 @@ export const updateCar = async (req, res) => {
     try {
       const id = req.params.id;
       let newCarData;
-      carData = await Car.findById(id);
+      const carData = await Car.findById(id);
       if (req.file) {
         const result = await uploadFile(req.file, res);
         newCarData = {
@@ -79,7 +79,7 @@ export const updateCar = async (req, res) => {
           image: result.secure_url,
         };
       } else {
-        newCarData = { ...req.body, image: carData.profile };
+        newCarData = { ...req.body, image: carData.image };
       }
   
       const car = await Car.findByIdAndUpdate(id, newCarData, {
@@ -103,23 +103,23 @@ export const updateCar = async (req, res) => {
 // delete a car 
 
 export const deleteCar = async (req, res) => {
-    const id = req.params.id;
-    try {
-      const car = await Car.findByIdAndDelete(id);
-      if (!car){
-        return res.status(400).json({
-          status: "failed",
-          message: "car not found",
-        });
-      }
-      return res.status(204).json({
-        status: "success",
-        message: "car deleted successfully",
-      });
-    } catch (error) {
-      return res.status(400).json({
+  const id = req.params.id;
+  try {
+    const car = await Car.findByIdAndDelete(id);
+    if (!car) {
+      return res.status(404).json({
         status: "failed",
-        message: error.message
+        message: "car not found",
       });
     }
-  };
+    return res.status(200).json({
+      status: "success",
+      message: "car deleted successfully",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "failed",
+      message: error.message
+    });
+  }
+}
