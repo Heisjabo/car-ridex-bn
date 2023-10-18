@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import userRouter from './routes/userRoute.js';
+import carsRouter from './routes/carsRoute.js';
 import cors from 'cors';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
@@ -22,6 +23,7 @@ app.get("/", (req, res) =>{
 });
 
 app.use("/api/v1", userRouter);
+app.use("/api/v1/", carsRouter);
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
 
