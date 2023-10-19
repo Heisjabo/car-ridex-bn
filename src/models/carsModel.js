@@ -32,7 +32,7 @@ const carSchema = new mongoose.Schema({
 
     gearType: {
         type: String,
-        required: true
+        required: false
     },
     
     price: {
@@ -40,10 +40,7 @@ const carSchema = new mongoose.Schema({
         required: true
     },
 
-    image: {
-        type: String,
-        required: true
-    }
+    images: [String],
 
 });
 

@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 import userRouter from './routes/userRoute.js';
 import carsRouter from './routes/carsRoute.js';
 import sparePartRouter from './routes/sparePartRoute.js';
+import partOrderRouter from './routes/partOrderRoute.js';
+import contactRouter from './routes/contactRoute.js';
 import cors from 'cors';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
-
 
 dotenv.config();
 const PORT = process.env.PORT || 5000
@@ -25,8 +26,11 @@ app.get("/", (req, res) =>{
 });
 
 app.use("/api/v1", userRouter);
-app.use("/api/v1/", carsRouter);
-app.use("/api/v1/", sparePartRouter);
+app.use("/api/v1", carsRouter);
+app.use("/api/v1", sparePartRouter);
+app.use("/api/v1", partOrderRouter);
+app.use("/api/v1", contactRouter);
+
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
 

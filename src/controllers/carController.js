@@ -1,11 +1,12 @@
 import Car from "../models/carsModel.js";
-import { uploadFile } from "../helpers/cloud.js";
+import { uploadFiles } from "../helpers/cloud.js";
 
 // create a new car
 
 export const registerCar = async (req, res) => {
     try{
-        const result = await uploadFile(req.file, res);
+        const result = await uploadFiles(req.files, res);
+        console.log(result);
         const newCar = await Car.create({
             name: req.body.name,
             model: req.body.model,
@@ -15,7 +16,7 @@ export const registerCar = async (req, res) => {
             fuelType: req.body.fuelType,
             gearType: req.body.gearType,
             price: req.body.price,
-            image: result.secure_url
+            images: result
           });
   
           return res.status(200).json({

@@ -1,11 +1,11 @@
 import SparePart from "../models/sparePartModel.js";
-import { uploadFile } from "../helpers/cloud.js";
+import { uploadFiles } from "../helpers/cloud.js";
 
 // registerPart
 
 export const registerPart = async (req, res) => {
     try{
-        const result = await uploadFile(req.file, res);
+        const result = await uploadFiles(req.files, res);
         const part = await SparePart.create({
             partName: req.body.partName,
             description: req.body.description,
@@ -14,7 +14,7 @@ export const registerPart = async (req, res) => {
             yearCompatibility: req.body.yearCompatibility,
             price: req.body.price,
             stockQuantity: req.body.stockQuantity,
-            image: result.secure_url,
+            images: result,
             dimensions: req.body.dimensions
         });
         return res.status(200).json({
@@ -72,13 +72,13 @@ export const updatePart = async (req, res) => {
       let newPartData;
       const partData = await SparePart.findById(id);
       if (req.file) {
-        const result = await uploadFile(req.file, res);
+        const result = await uploadFiles(req.files, res);
         newPartData = {
           ...req.body,
-          image: result.secure_url,
+          images: result
         };
       } else {
-        newPartData = { ...req.body, image: partData.image };
+        newPartData = { ...req.body, images: partData.images };
       }
   
       const sparePart = await SparePart.findByIdAndUpdate(id, newPartData, {

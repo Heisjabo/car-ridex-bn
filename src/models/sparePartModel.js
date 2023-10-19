@@ -6,7 +6,7 @@ const sparePartSchema = new mongoose.Schema({
       required: true,
     },
     description: String,
-    image: String,
+    images: [String],
     brand: String,
     modelCompatibility: [String],
     yearCompatibility: [Number],
