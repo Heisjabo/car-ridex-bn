@@ -15,6 +15,7 @@ export const registerCar = async (req, res) => {
             fuelConsumption: req.body.fuelConsumption,
             fuelType: req.body.fuelType,
             gearType: req.body.gearType,
+            category: req.body.category,
             price: req.body.price,
             images: result
           });
