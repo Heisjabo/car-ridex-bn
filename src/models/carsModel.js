@@ -39,7 +39,10 @@ const carSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    category: {
+        type: String,
+        required: false
+    },
     images: [String],
 
 });
