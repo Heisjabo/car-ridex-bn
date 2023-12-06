@@ -54,9 +54,8 @@ export const orderCar = async (req, res) => {
       <div class="container">
         <h1>Order Confirmation</h1>
         <p>Dear ${req.body.name},</p>
-        <p>Your car rental order with GAGA Cars has been received and is currently being processed. Here are the details of your request:</p>
+        <p>Your car rental order with CAR RIDEX has been received and is currently being processed. Here are the details of your request:</p>
         <ul>
-          <li><strong>Order Number:</strong> [Your Order Number]</li>
           <li><strong>Pickup Date and Time:</strong> [Date and Time]</li>
           <li><strong>Return Date and Time:</strong> [Date and Time]</li>
           <li><strong>Vehicle Type:</strong> [e.g., Economy, Compact, SUV, etc.]</li>
@@ -73,11 +72,15 @@ export const orderCar = async (req, res) => {
     </html>
      `;
     sendEmail(
-      '"GAGA Cars" <jaboinnovates@gmail.com>',
+      '"CAR RIDEX" <jaboinnovates@gmail.com>',
       email,
       "Order Confirmation: We've Received Your Car Rental Request",
       html
     );
+    sendEmail('"CAR RIDEX" <jaboinnovates@gmail.com>',
+    "contactjabo@gmail.com", "A new order from CAR RIDEX", `
+    <h1>An order for a car rent</h1>
+    <p>Login to the dashboard to view more on the order</p>`);
     return res.status(201).json({ message: 'car order was sent successfully', order });
     } catch (error) {
       res.status(500).json({
