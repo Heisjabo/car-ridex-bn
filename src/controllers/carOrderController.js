@@ -6,10 +6,13 @@ import sendEmail from "../helpers/sendEmail.js";
 
 export const orderCar = async (req, res) => {
     try {
+        
         const order = await CarOrder.create({
         name: req.body.name,
         phone: req.body.phone,
         address: req.body.address,
+        pickupDate: req.body.pickupDate,
+        returnDate: req.body.returnDate,
         email: req.body.email,
         item: req.body.item,
         price: req.body.price, 

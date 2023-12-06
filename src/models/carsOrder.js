@@ -17,9 +17,17 @@ const carsOrderSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    pickupDate:{
+        type: Date,
+        required: true,
+    },
+    returnDate:{
+        type: Date,
+        required: true,
+    },
     item: {
-                type: String,
-                required: true,
+            type: String,
+            required: true,
     },
     price: {
         type: Number,
